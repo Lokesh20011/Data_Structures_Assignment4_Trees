@@ -1,0 +1,72 @@
+#Perform Pre-order, Post-order, In-order traversal
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if root is None:
+        return TreeNode(value)
+
+    print("Enter the value for the left child of node {} (or 'None' to skip): ".format(root.value))
+    value_left = input()
+    if value_left.lower() == 'none':
+        root.left = None
+    else:
+        root.left = insert(root.left, int(value_left))
+
+    print("Enter the value for the right child of node {} (or 'None' to skip): ".format(root.value))
+    value_right = input()
+    if value_right.lower() == 'none':
+        root.right = None
+    else:
+        root.right = insert(root.right, int(value_right))
+
+    return root
+
+def preorder(root):
+    if root is None:
+        return
+
+    print(root.value)
+    preorder(root.left)
+    preorder(root.right)
+
+def inorder(root):
+    if root is None:
+        return
+
+    inorder(root.left)
+    print(root.value)
+    inorder(root.right)
+
+def postorder(root):
+    if root is None:
+        return
+
+    postorder(root.left)
+    postorder(root.right)
+    print(root.value)
+
+# Get the input from the user
+root = None
+while True:
+    print("Enter the value of the node (or 'None' to stop): ")
+    value = input()
+    if value.lower() == 'none':
+        break
+
+    root = insert(root, int(value))
+
+# Print the tree in preorder
+print("Preorder traversal:")
+preorder(root)
+
+# Print the tree in inorder
+print("Inorder traversal:")
+inorder(root)
+
+# Print the tree in postorder
+print("Postorder traversal:")
+postorder(root)
