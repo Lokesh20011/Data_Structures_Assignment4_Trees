@@ -1,0 +1,44 @@
+#Print the nodes at odd levels of a tree
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def print_nodes_at_odd_levels(root):
+    if root is None:
+        return
+
+    current_level = 1
+    queue = [root]
+
+    while queue:
+        current_size = len(queue)
+
+        for _ in range(current_size):
+            current_node = queue.pop(0)
+
+            if current_level % 2 == 1:
+                print(current_node.value, end=" ")
+
+            if current_node.left is not None:
+                queue.append(current_node.left)
+
+            if current_node.right is not None:
+                queue.append(current_node.right)
+
+        current_level += 1
+
+def main():
+    root = TreeNode(1)
+    root.left = TreeNode(2)
+    root.right = TreeNode(3)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(5)
+    root.right.left = TreeNode(6)
+    root.right.right = TreeNode(7)
+
+    print_nodes_at_odd_levels(root)
+
+if __name__ == "__main__":
+    main()
