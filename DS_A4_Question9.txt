@@ -1,0 +1,48 @@
+#Find maximum level sum in Binary Tree
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def max_level_sum(root):
+    if root is None:
+        return 0
+
+    max_sum = root.value
+    queue = [root]
+    curr_level = 0
+
+    while queue:
+        current_size = len(queue)
+        sum_of_subtree = 0
+
+        for _ in range(current_size):
+            current_node = queue.pop(0)
+            sum_of_subtree += current_node.value
+
+            if current_node.left is not None:
+                queue.append(current_node.left)
+
+            if current_node.right is not None:
+                queue.append(current_node.right)
+
+        if sum_of_subtree > max_sum:
+            max_sum = sum_of_subtree
+            curr_level += 1
+
+    return max_sum, curr_level
+
+def main():
+    root = TreeNode(10)
+    root.left = TreeNode(5)
+    root.right = TreeNode(15)
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(7)
+
+    max_sum, level = max_level_sum(root)
+
+    print("The maximum level sum is", max_sum, "and the level is", level)
+
+if __name__ == "__main__":
+    main()
