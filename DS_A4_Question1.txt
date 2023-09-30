@@ -1,0 +1,47 @@
+#Implement Binary Tree and Build Tree:
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def insert(root, value):
+    if root is None:
+        return TreeNode(value)
+
+    print("Enter the value for the left child of node {} (or 'None' to skip): ".format(root.value))
+    value_left = input()
+    if value_left.lower() == 'none':
+        root.left = None
+    else:
+        root.left = insert(root.left, int(value_left))
+
+    print("Enter the value for the right child of node {} (or 'None' to skip): ".format(root.value))
+    value_right = input()
+    if value_right.lower() == 'none':
+        root.right = None
+    else:
+        root.right = insert(root.right, int(value_right))
+
+    return root
+
+def print_tree(root):
+    if root is None:
+        return
+
+    print(root.value)
+    print_tree(root.left)
+    print_tree(root.right)
+
+# Get the input from the user
+root = None
+while True:
+    print("Enter the value of the node (or 'None' to stop): ")
+    value = input()
+    if value.lower() == 'none':
+        break
+
+    root = insert(root, int(value))
+
+# Print the tree
+print_tree(root)
