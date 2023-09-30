@@ -1,0 +1,30 @@
+#Function to print all the leaves in a given binary tree
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+
+def print_leaves(root):
+    if root is None:
+        return
+
+    if root.left is None and root.right is None:
+        print(root.value)
+
+    print_leaves(root.left)
+    print_leaves(root.right)
+
+# Get the input from the user
+root = None
+while True:
+    print("Enter the value of the node (or 'None' to stop): ")
+    value = input()
+    if value.lower() == 'none':
+        break
+
+    root = insert(root, int(value))
+
+# Print all the leaves in the tree
+print("The leaves of the tree are:")
+print_leaves(root)
